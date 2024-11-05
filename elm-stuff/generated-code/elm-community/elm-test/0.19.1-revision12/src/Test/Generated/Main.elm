@@ -12,7 +12,7 @@ main =
     Test.Runner.Node.run
         { runs = 100
         , report = ConsoleReport UseColor
-        , seed = 190433041852737
+        , seed = 70419574430548
         , processes = 8
         , globs =
             []
@@ -21,9 +21,10 @@ main =
             ]
         }
         [ ( "PhotoGrooveTests"
-          , [ Test.Runner.Node.check PhotoGrooveTests.suite
-            , Test.Runner.Node.check PhotoGrooveTests.decoderTest
+          , [ Test.Runner.Node.check PhotoGrooveTests.decoderTest
             , Test.Runner.Node.check PhotoGrooveTests.slidHueSetsHue
+            , Test.Runner.Node.check PhotoGrooveTests.sliders
+            , Test.Runner.Node.check PhotoGrooveTests.noPhotosNoThumbnails
             ]
           )
         ]

@@ -1,22 +1,30 @@
-module PhotoGrooveTests exposing (suite, decoderTest)
+module PhotoGrooveTests exposing ( decoderTest, slidHueSetsHue)
 
 import Expect exposing (Expectation)
-import Json.Decode exposing (decodeString)
+import Fuzz exposing (Fuzzer, int, list, string)
+import Json.Decode as Decode exposing (decodeValue)
 import Json.Encode as Encode
-import PhotoGroove
+import PhotoGroove exposing (initialModel, photoDecoder, Model, Msg(..), Photo, main, update)
 import Test exposing (..)
 
-
-suite : Test
-suite =
-    test "one plus one equals two" (\_ -> Expect.equal 2 (1 + 1))
-
-decoderTest: Test
-decoderTest = 
-    test "title defaults to (untitled)" <|
-        \_ ->
-            """{"url": "fruits.com", "size": 5}"""
-                |> decodeString PhotoGroove.photoDecoder
+decoderTest : Test
+decoderTest =
+    fuzz2 string int "title defaults to (untitled)" <|
+        \url size ->
+            [ ( "url", Encode.string url )
+            , ( "size", Encode.int size )
+            ]
+                |> Encode.object
+                |> decodeValue photoDecoder
                 |> Result.map .title
                 |> Expect.equal (Ok "(untitled)")
         
+slidHueSetsHue : Test
+slidHueSetsHue =
+    fuzz int "SlidHue sets the hue" <|
+        \amount ->
+            initialModel
+                |> update (SlidHue amount)
+                |> Tuple.first
+                |> .hue
+                |> Expect.equal amount

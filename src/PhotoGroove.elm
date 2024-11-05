@@ -1,4 +1,4 @@
-port module PhotoGroove exposing (main, photoDecoder)
+port module PhotoGroove exposing (Model, Msg(..), Photo, initialModel, main, photoDecoder, update)
 
 import Array exposing (Array)
 import Browser
@@ -11,7 +11,7 @@ import Json.Decode.Pipeline
 import Json.Encode as Encode
 import Random
 
--- pagina 193 do PDF seção 2.2
+-- pagina 205 do PDF seção 2.2
 -- elm make src/PhotoGroove.elm --output app.js
 -- elm make --output=app.js src/PhotoGroove.elm 
 

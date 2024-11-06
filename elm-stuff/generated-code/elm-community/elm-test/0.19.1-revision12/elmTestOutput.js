@@ -14243,6 +14243,271 @@ var $author$project$PhotoGrooveTests$sliders = A2(
 				return $.noise;
 			})
 		]));
+var $elm_explorations$test$Test$Runner$Failure$Comparison = F2(
+	function (a, b) {
+		return {$: 'Comparison', a: a, b: b};
+	});
+var $elm_explorations$test$Expect$compareWith = $elm_explorations$test$Expect$testWith($elm_explorations$test$Test$Runner$Failure$Comparison);
+var $elm_explorations$test$Expect$atLeast = A2($elm_explorations$test$Expect$compareWith, 'Expect.atLeast', $elm$core$Basics$ge);
+var $elm_explorations$test$Test$Html$Selector$Internal$Classes = function (a) {
+	return {$: 'Classes', a: a};
+};
+var $elm_explorations$test$Test$Html$Selector$Internal$Invalid = {$: 'Invalid'};
+var $elm_explorations$test$Test$Html$Selector$Internal$Style = function (a) {
+	return {$: 'Style', a: a};
+};
+var $elm_explorations$test$Test$Html$Selector$Internal$Attribute = function (a) {
+	return {$: 'Attribute', a: a};
+};
+var $elm_explorations$test$Test$Html$Selector$Internal$namedAttr = F2(
+	function (name, value) {
+		return $elm_explorations$test$Test$Html$Selector$Internal$Attribute(
+			{name: name, value: value});
+	});
+var $elm_explorations$test$Test$Html$Selector$Internal$BoolAttribute = function (a) {
+	return {$: 'BoolAttribute', a: a};
+};
+var $elm_explorations$test$Test$Html$Selector$Internal$namedBoolAttr = F2(
+	function (name, value) {
+		return $elm_explorations$test$Test$Html$Selector$Internal$BoolAttribute(
+			{name: name, value: value});
+	});
+var $elm_explorations$test$Test$Html$Selector$orElseLazy = F2(
+	function (fma, mb) {
+		if (mb.$ === 'Err') {
+			return fma(_Utils_Tuple0);
+		} else {
+			return mb;
+		}
+	});
+var $elm_explorations$test$Test$Html$Internal$Inert$attributeToJson = function (attribute) {
+	return _HtmlAsJson_attributeToJson(attribute);
+};
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$Attribute = function (a) {
+	return {$: 'Attribute', a: a};
+};
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$AttributeRecord = F2(
+	function (key, value) {
+		return {key: key, value: value};
+	});
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$NamespacedAttribute = function (a) {
+	return {$: 'NamespacedAttribute', a: a};
+};
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$NamespacedAttributeRecord = F3(
+	function (key, value, namespace) {
+		return {key: key, namespace: namespace, value: value};
+	});
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$Property = function (a) {
+	return {$: 'Property', a: a};
+};
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$PropertyRecord = F2(
+	function (key, value) {
+		return {key: key, value: value};
+	});
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$Style = function (a) {
+	return {$: 'Style', a: a};
+};
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$Constants$propKey = 'a2';
+var $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$decodeAttribute = A2(
+	$elm$json$Json$Decode$andThen,
+	function (tag) {
+		return _Utils_eq(tag, $elm_explorations$test$Test$Html$Internal$ElmHtml$Constants$attributeKey) ? A3(
+			$elm$json$Json$Decode$map2,
+			F2(
+				function (key, val) {
+					return $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$Attribute(
+						A2($elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$AttributeRecord, key, val));
+				}),
+			A2($elm$json$Json$Decode$field, 'n', $elm$json$Json$Decode$string),
+			A2($elm$json$Json$Decode$field, 'o', $elm$json$Json$Decode$string)) : (_Utils_eq(tag, $elm_explorations$test$Test$Html$Internal$ElmHtml$Constants$attributeNamespaceKey) ? A2(
+			$elm$json$Json$Decode$map,
+			$elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$NamespacedAttribute,
+			A4(
+				$elm$json$Json$Decode$map3,
+				$elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$NamespacedAttributeRecord,
+				A2($elm$json$Json$Decode$field, 'n', $elm$json$Json$Decode$string),
+				A2(
+					$elm$json$Json$Decode$at,
+					_List_fromArray(
+						['o', 'o']),
+					$elm$json$Json$Decode$string),
+				A2(
+					$elm$json$Json$Decode$at,
+					_List_fromArray(
+						['o', 'f']),
+					$elm$json$Json$Decode$string))) : (_Utils_eq(tag, $elm_explorations$test$Test$Html$Internal$ElmHtml$Constants$styleKey) ? A3(
+			$elm$json$Json$Decode$map2,
+			F2(
+				function (key, val) {
+					return $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$Style(
+						{key: key, value: val});
+				}),
+			A2($elm$json$Json$Decode$field, 'n', $elm$json$Json$Decode$string),
+			A2($elm$json$Json$Decode$field, 'o', $elm$json$Json$Decode$string)) : (_Utils_eq(tag, $elm_explorations$test$Test$Html$Internal$ElmHtml$Constants$propKey) ? A3(
+			$elm$json$Json$Decode$map2,
+			F2(
+				function (key, val) {
+					return $elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$Property(
+						A2($elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$PropertyRecord, key, val));
+				}),
+			A2($elm$json$Json$Decode$field, 'n', $elm$json$Json$Decode$string),
+			A2(
+				$elm$json$Json$Decode$at,
+				_List_fromArray(
+					['o', 'a']),
+				$elm$json$Json$Decode$value)) : $elm$json$Json$Decode$fail('Unexpected Html.Attribute tag: ' + tag))));
+	},
+	A2($elm$json$Json$Decode$field, '$', $elm$json$Json$Decode$string));
+var $elm_explorations$test$Test$Html$Internal$Inert$parseAttribute = function (attr) {
+	var _v0 = A2(
+		$elm$json$Json$Decode$decodeValue,
+		$elm_explorations$test$Test$Html$Internal$ElmHtml$InternalTypes$decodeAttribute,
+		$elm_explorations$test$Test$Html$Internal$Inert$attributeToJson(attr));
+	if (_v0.$ === 'Ok') {
+		var parsedAttribute = _v0.a;
+		return $elm$core$Result$Ok(parsedAttribute);
+	} else {
+		var jsonError = _v0.a;
+		return $elm$core$Result$Err(
+			'Error internally processing Attribute for testing - please report this error message as a bug: ' + $elm$json$Json$Decode$errorToString(jsonError));
+	}
+};
+var $elm$core$String$toLower = _String_toLower;
+var $elm$core$Result$withDefault = F2(
+	function (def, result) {
+		if (result.$ === 'Ok') {
+			var a = result.a;
+			return a;
+		} else {
+			return def;
+		}
+	});
+var $elm_explorations$test$Test$Html$Selector$attribute = function (attr) {
+	var _v0 = $elm_explorations$test$Test$Html$Internal$Inert$parseAttribute(attr);
+	_v0$3:
+	while (true) {
+		if (_v0.$ === 'Ok') {
+			switch (_v0.a.$) {
+				case 'Attribute':
+					var key = _v0.a.a.key;
+					var value = _v0.a.a.value;
+					return ($elm$core$String$toLower(key) === 'class') ? $elm_explorations$test$Test$Html$Selector$Internal$Classes(
+						A2($elm$core$String$split, ' ', value)) : A2($elm_explorations$test$Test$Html$Selector$Internal$namedAttr, key, value);
+				case 'Property':
+					var key = _v0.a.a.key;
+					var value = _v0.a.a.value;
+					return (key === 'className') ? $elm_explorations$test$Test$Html$Selector$Internal$Classes(
+						A2(
+							$elm$core$Result$withDefault,
+							_List_Nil,
+							A2(
+								$elm$core$Result$map,
+								$elm$core$String$split(' '),
+								A2($elm$json$Json$Decode$decodeValue, $elm$json$Json$Decode$string, value)))) : A2(
+						$elm$core$Result$withDefault,
+						$elm_explorations$test$Test$Html$Selector$Internal$Invalid,
+						A2(
+							$elm_explorations$test$Test$Html$Selector$orElseLazy,
+							function (_v1) {
+								return A2(
+									$elm$core$Result$map,
+									$elm_explorations$test$Test$Html$Selector$Internal$namedBoolAttr(key),
+									A2($elm$json$Json$Decode$decodeValue, $elm$json$Json$Decode$bool, value));
+							},
+							A2(
+								$elm$core$Result$map,
+								$elm_explorations$test$Test$Html$Selector$Internal$namedAttr(key),
+								A2($elm$json$Json$Decode$decodeValue, $elm$json$Json$Decode$string, value))));
+				case 'Style':
+					var key = _v0.a.a.key;
+					var value = _v0.a.a.value;
+					return $elm_explorations$test$Test$Html$Selector$Internal$Style(
+						{key: key, value: value});
+				default:
+					break _v0$3;
+			}
+		} else {
+			break _v0$3;
+		}
+	}
+	return $elm_explorations$test$Test$Html$Selector$Internal$Invalid;
+};
+var $author$project$PhotoGrooveTests$thumbnailRendered = F2(
+	function (url, query) {
+		return A2(
+			$elm_explorations$test$Test$Html$Query$count,
+			$elm_explorations$test$Expect$atLeast(1),
+			A2(
+				$elm_explorations$test$Test$Html$Query$findAll,
+				_List_fromArray(
+					[
+						$elm_explorations$test$Test$Html$Selector$tag('img'),
+						$elm_explorations$test$Test$Html$Selector$attribute(
+						$elm$html$Html$Attributes$src(
+							_Utils_ap($author$project$PhotoGroove$urlPrefix, url)))
+					]),
+				query));
+	});
+var $elm_explorations$test$Expect$allHelp = F2(
+	function (list, query) {
+		allHelp:
+		while (true) {
+			if (!list.b) {
+				return $elm_explorations$test$Expect$pass;
+			} else {
+				var check = list.a;
+				var rest = list.b;
+				var _v1 = check(query);
+				if (_v1.$ === 'Pass') {
+					var $temp$list = rest,
+						$temp$query = query;
+					list = $temp$list;
+					query = $temp$query;
+					continue allHelp;
+				} else {
+					var outcome = _v1;
+					return outcome;
+				}
+			}
+		}
+	});
+var $elm_explorations$test$Expect$all = F2(
+	function (list, query) {
+		return $elm$core$List$isEmpty(list) ? $elm_explorations$test$Test$Expectation$fail(
+			{
+				description: 'Expect.all was given an empty list. You must make at least one expectation to have a valid test!',
+				reason: $elm_explorations$test$Test$Runner$Failure$Invalid($elm_explorations$test$Test$Runner$Failure$EmptyList)
+			}) : A2($elm_explorations$test$Expect$allHelp, list, query);
+	});
+var $author$project$PhotoGroove$photoFromUrl = function (url) {
+	return {size: 0, title: '', url: url};
+};
+var $author$project$PhotoGrooveTests$thumbnailsWork = A3(
+	$elm_explorations$test$Test$fuzz,
+	A2($elm_explorations$test$Fuzz$intRange, 1, 5),
+	'URLs render as thumbnails',
+	function (urlCount) {
+		var urls = A2(
+			$elm$core$List$map,
+			function (num) {
+				return $elm$core$String$fromInt(num) + '.png';
+			},
+			A2($elm$core$List$range, 1, urlCount));
+		var thumbnailChecks = A2($elm$core$List$map, $author$project$PhotoGrooveTests$thumbnailRendered, urls);
+		return A2(
+			$elm_explorations$test$Expect$all,
+			thumbnailChecks,
+			$elm_explorations$test$Test$Html$Query$fromHtml(
+				$author$project$PhotoGroove$view(
+					_Utils_update(
+						$author$project$PhotoGroove$initialModel,
+						{
+							status: A2(
+								$author$project$PhotoGroove$Loaded,
+								A2($elm$core$List$map, $author$project$PhotoGroove$photoFromUrl, urls),
+								'')
+						}))));
+	});
 var $author$project$Test$Generated$Main$main = A2(
 	$author$project$Test$Runner$Node$run,
 	{
@@ -14252,7 +14517,7 @@ var $author$project$Test$Generated$Main$main = A2(
 		processes: 8,
 		report: $author$project$Test$Reporter$Reporter$ConsoleReport($author$project$Console$Text$UseColor),
 		runs: 100,
-		seed: 70419574430548
+		seed: 223387831833065
 	},
 	_List_fromArray(
 		[
@@ -14260,6 +14525,8 @@ var $author$project$Test$Generated$Main$main = A2(
 			'PhotoGrooveTests',
 			_List_fromArray(
 				[
+					$author$project$Test$Runner$Node$check($author$project$PhotoGrooveTests$thumbnailsWork),
+					$author$project$Test$Runner$Node$check($author$project$PhotoGrooveTests$thumbnailRendered),
 					$author$project$Test$Runner$Node$check($author$project$PhotoGrooveTests$decoderTest),
 					$author$project$Test$Runner$Node$check($author$project$PhotoGrooveTests$slidHueSetsHue),
 					$author$project$Test$Runner$Node$check($author$project$PhotoGrooveTests$sliders),
@@ -14269,7 +14536,7 @@ var $author$project$Test$Generated$Main$main = A2(
 _Platform_export({'Test':{'Generated':{'Main':{'init':$author$project$Test$Generated$Main$main($elm$json$Json$Decode$int)(0)}}}});}(this));
 return this.Elm;
 })({});
-var pipeFilename = "/tmp/elm_test-31563.sock";
+var pipeFilename = "/tmp/elm_test-27220.sock";
 var net = require('net'),
   client = net.createConnection(pipeFilename);
 

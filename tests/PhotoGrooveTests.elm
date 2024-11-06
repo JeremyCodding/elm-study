@@ -1,10 +1,10 @@
-module PhotoGrooveTests exposing ( thumbnailRendered, decoderTest, slidHueSetsHue, sliders, noPhotosNoThumbnails)
+module PhotoGrooveTests exposing ( thumbnailsWork, thumbnailRendered, decoderTest, slidHueSetsHue, sliders, noPhotosNoThumbnails)
 
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
 import Json.Decode as Decode exposing (decodeValue)
 import Json.Encode as Encode
-import PhotoGroove exposing (view, urlPrefix, Status(..), initialModel, photoDecoder, Model, Msg(..), Photo, main, update)
+import PhotoGroove exposing (photoFromUrl, view, urlPrefix, Status(..), initialModel, photoDecoder, Model, Msg(..), Photo, main, update)
 import Test exposing (..)
 import Html.Attributes as Attr exposing (src)
 import Test.Html.Query as Query
@@ -65,3 +65,22 @@ thumbnailRendered url query =
     query
         |> Query.findAll[ tag "img", attribute (Attr.src (urlPrefix ++ url)) ]
         |> Query.count (Expect.atLeast 1)
+
+thumbnailsWork : Test
+thumbnailsWork =
+    fuzz (Fuzz.intRange 1 5) "URLs render as thumbnails" <|
+        \urlCount ->
+            let
+                urls : List String
+                urls =
+                    List.range 1 urlCount
+                        |> List.map (\num -> String.fromInt num ++ ".png")
+                thumbnailChecks : List (Query.Single msg -> Expectation)
+                thumbnailChecks =
+                    List.map thumbnailRendered urls
+            in
+                { initialModel | status = Loaded (List.map photoFromUrl urls) ""
+        }
+                    |> view
+                    |> Query.fromHtml
+                    |> Expect.all thumbnailChecks

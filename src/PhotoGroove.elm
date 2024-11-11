@@ -210,9 +210,9 @@ applyFilters model =
         Loaded photos selectedUrl ->
             let
                 filters =
-                    [ { name = "Hue", amount = toFloat model.hue / 11 }
-                    , { name = "Ripple", amount = toFloat model.ripple / 11 }
-                    , { name = "Noise", amount = toFloat model.noise / 11 }
+                    [ { name = "Hue", amount = 1 }
+                    , { name = "Ripple", amount = 1 }
+                    , { name = "Noise", amount = 1 }
                     ]
                 url =
                     urlPrefix ++ "large/" ++ selectedUrl

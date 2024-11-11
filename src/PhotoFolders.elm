@@ -9,19 +9,33 @@ import Html.Attributes exposing (class, src)
 import Html.Events exposing (onClick)
 import Dict exposing (Dict)
 
--- pagina 233 do PDF seção 2.2
+-- pagina 241 do PDF seção 2.2
 -- elm make src/PhotoFolders.elm --output app.js
 -- elm make --output=app.js src/PhotoFolders.elm 
+
+type Folder =
+    Folder
+        { name : String
+        , photoUrls : List String
+        , subfolders : List Folder
+        , expanded : Bool
+        }
 
 type alias Model =
     { selectedPhotoUrl : Maybe String
     , photos : Dict String Photo
+    , root: Folder
     }
 
 initialModel : Model
 initialModel =
     { selectedPhotoUrl = Nothing
     , photos = Dict.empty
+    , root = Folder {name = "Loading"
+        , photoUrls = []
+        , subfolders = []
+        , expanded = True 
+        }
     }
 
 init : () -> ( Model, Cmd Msg )
@@ -60,15 +74,55 @@ modelDecoder =
                     }
                 )
             ]
+        , root =
+            Folder
+                { name = "Photos", photoUrls = []
+                , subfolders =
+                    [ Folder
+                        { name = "2016", photoUrls = [ "trevi", "coli" ]
+                        , subfolders =
+                            [ Folder
+                                { name = "outdoors"
+                                , photoUrls = [], subfolders = [], expanded = True 
+                                }
+                            , Folder
+                                { name = "indoors"
+                                , photoUrls = [ "fresco" ], subfolders = [], expanded = True 
+                                }
+                            ]
+                            , expanded = True 
+                        }
+                    , Folder
+                        { name = "2017", photoUrls = []
+                        , subfolders =
+                            [ Folder
+                            { name = "outdoors"
+                            , photoUrls = [], subfolders = []
+                            , expanded = True 
+                            }
+                            , Folder
+                            { name = "indoors"
+                            , photoUrls = [], subfolders = []
+                            , expanded = True 
+                            }
+                        ]
+                        , expanded = True 
+                    }
+                ]
+                , expanded = True 
+            }
         }
 
 type Msg
     = ClickedPhoto String
     | GotInitialModel (Result Http.Error Model)
+    | ClickedFolder FolderPath
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        ClickedFolder path ->
+            ( { model | root = toggleExpanded path model.root }, Cmd.none )
         ClickedPhoto url ->
             ( { model | selectedPhotoUrl = Just url }, Cmd.none )
         GotInitialModel (Ok newModel) ->
@@ -92,7 +146,12 @@ view model =
                     text ""
     in
     div [ class "content" ]
-    [ div [ class "selected-photo" ] [ selectedPhoto ] ]
+    [ div [ class "folders" ]
+        [ h1 [] [ text "Folders" ]
+        , viewFolder End model.root
+        ]
+    ,div [ class "selected-photo" ] [ selectedPhoto ] 
+    ]
 
 main : Program () Model Msg
 main =
@@ -135,5 +194,54 @@ urlPrefix : String
 urlPrefix =
     "http://elm-in-action.com/"
 
+viewFolder : FolderPath -> Folder -> Html Msg
+viewFolder path (Folder folder) =
+    let
+        viewSubfolder : Int -> Folder -> Html Msg
+        viewSubfolder index subfolder =
+            viewFolder (appendIndex index path) subfolder
+        folderLabel =
+            label [ onClick (ClickedFolder path) ] [ text folder.name ]
+    in
+    if folder.expanded then
+        let
+            contents =
+                List.indexedMap viewSubfolder folder.subfolders
+        in
+        div [ class "folder expanded" ]
+            [ folderLabel
+            , div [ class "contents" ] contents
+            ]
+    else
+        div [ class "folder collapsed" ] [ folderLabel ]
+appendIndex : Int -> FolderPath -> FolderPath
+appendIndex index path =
+    case path of
+        End ->
+            Subfolder index End
 
+        Subfolder subfolderIndex remainingPath ->
+            Subfolder subfolderIndex (appendIndex index remainingPath)
 
+type FolderPath
+    = End
+    | Subfolder Int FolderPath
+
+toggleExpanded : FolderPath -> Folder -> Folder
+toggleExpanded path (Folder folder) =
+    case path of
+        End ->
+            Folder { folder | expanded = not folder.expanded }
+        Subfolder targetIndex remainingPath ->
+            let
+                subfolders : List Folder
+                subfolders =
+                    List.indexedMap transform folder.subfolders
+                transform : Int -> Folder -> Folder
+                transform currentIndex currentSubfolder =
+                    if currentIndex == targetIndex then
+                        toggleExpanded remainingPath currentSubfolder
+                    else
+                        currentSubfolder
+            in
+            Folder { folder | subfolders = subfolders }

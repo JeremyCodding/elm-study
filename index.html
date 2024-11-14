@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- <link rel="stylesheet" href="http://elm-in-action.com/styles.css" />
+    <link rel="stylesheet" href="http://elm-in-action.com/styles.css" />
     <link rel="stylesheet" href="http://elm-in-action.com/range-slider.css" />
-    <script src="http://elm-in-action.com/range-slider.js"></script> -->
+    <script src="http://elm-in-action.com/range-slider.js"></script>
     <script>
       class RangeSlider extends HTMLElement {
         connectedCallback() {
@@ -29,14 +29,17 @@
   </head>
   <body>
     <div id="app"></div>
-    <!-- <script src="http://elm-in-action.com/pasta.js"></script> -->
-    <script src="app.js"></script>
+    <script src="http://elm-in-action.com/pasta.js"></script>
+    <script src="/app.js"></script>
     <script>
-      var app = Elm.PhotoFolders.init({ node: document.getElementById("app") });
-    </script>
+      var app = Elm.Main.init({node: document.getElementById("app")});
+      </script>
   </body>
 </html>
 
+<!-- <script>
+  var app = Elm.PhotoFolders.init({ node: document.getElementById("app") });
+</script> -->
 <!-- <script>
   var app = Elm.PhotoGroove.init({
     node: document.getElementById("app"),

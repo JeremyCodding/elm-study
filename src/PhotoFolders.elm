@@ -9,7 +9,7 @@ import Html.Attributes exposing (class, src)
 import Html.Events exposing (onClick)
 import Dict exposing (Dict)
 
--- pagina 241 do PDF seção 2.2
+-- pagina 267 do PDF seção 2.2
 -- elm make src/PhotoFolders.elm --output app.js
 -- elm make --output=app.js src/PhotoFolders.elm 
 
